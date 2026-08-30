@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600;700&family=Permanent+Marker&display=swap');
+
+/* ── existing organ / creature animations ───────────────── */
+@keyframes mutation-float   { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-12px) rotate(.5deg)} }
+@keyframes spark-flicker    { 0%,100%{opacity:.15;transform:scale(.7)} 50%{opacity:1;transform:scale(1.25)} }
+@keyframes pulse-red        { 0%,100%{box-shadow:0 0 20px #E63B2E,0 6px 0 #080807} 50%{box-shadow:0 0 50px #E63B2E,0 0 80px #F36B21,0 6px 0 #080807} }
+@keyframes screen-flash     { 0%{opacity:0;transform:translateX(-8px) skewX(-10deg)} 12%{opacity:1} 100%{opacity:0;transform:translateX(8px) skewX(10deg)} }
+@keyframes wobble           { 0%,100%{transform:translateY(-8px) rotate(0)} 50%{transform:translateY(-8px) rotate(-2deg)} }
+
+/* ── LED / indicator animations ─────────────────────────── */
+@keyframes blink-led        { 0%,44%{opacity:1;box-shadow:0 0 8px #E63B2E,0 0 16px rgba(230,59,46,.4)} 50%,100%{opacity:.15;box-shadow:none} }
+@keyframes blink-led-slow   { 0%,55%{opacity:1;box-shadow:0 0 8px #E63B2E,0 0 16px rgba(230,59,46,.4)} 60%,100%{opacity:.08;box-shadow:none} }
+@keyframes cyan-pulse       { 0%,100%{opacity:.7;box-shadow:0 0 4px #17C9C2} 50%{opacity:1;box-shadow:0 0 10px #17C9C2,0 0 20px rgba(23,201,194,.4)} }
+/* organ-graft: spring overshoot scale-in for newly installed organs */
+@keyframes organ-graft      {
+  from { opacity:0; transform:translate(-50%,-50%) scale(.4); }
+  to   { opacity:1; transform:translate(-50%,-50%) scale(1);  }
+}
+/* dot-travel: percentage of offset-distance for CSS offset-path dots */
+@keyframes dot-travel       { 0%{offset-distance:0%} 100%{offset-distance:100%} }
+/* specimen-flash: cyan flash on creature body when organs are installed */
+@keyframes specimen-flash   {
+  0%  { filter:brightness(1) }
+  25% { filter:brightness(1.7) drop-shadow(0 0 28px #17C9C2) }
+  55% { filter:brightness(1.2) drop-shadow(0 0 14px #17C9C2) }
+  100%{ filter:brightness(1) }
+}
+@keyframes meter-scan       { 0%{transform:translateX(-140%)} 100%{transform:translateX(320%)} }
+@keyframes tray-glow        { 0%,100%{opacity:.8;box-shadow:0 0 10px #17C9C2,0 0 24px rgba(23,201,194,.3)} 50%{opacity:1;box-shadow:0 0 18px #17C9C2,0 0 40px rgba(23,201,194,.5)} }
+@keyframes slot-illuminate  { 0%,100%{box-shadow:0 0 0 transparent} 50%{box-shadow:0 0 18px rgba(245,212,0,.5),inset 0 -3px 8px rgba(245,212,0,.2)} }
+
+/* ── ambient environment ─────────────────────────────────── */
+@keyframes chamber-flicker  {
+  0%{opacity:.18} 13%{opacity:.12} 27%{opacity:.22} 41%{opacity:.09}
+  58%{opacity:.20} 72%{opacity:.14} 88%{opacity:.24} 100%{opacity:.18}
+}
+@keyframes furnace-glow     { 0%,100%{opacity:.22} 40%{opacity:.38} 65%{opacity:.28} }
+@keyframes beacon-a         { 0%,42%{opacity:1} 47%,100%{opacity:.06} }
+@keyframes beacon-b         { 0%,100%{opacity:.06} 53%,95%{opacity:1} }
+@keyframes steam-rise       {
+  0%  {transform:translateY(0)    scaleX(1);   opacity:.55}
+  50% {transform:translateY(-30px) scaleX(1.5); opacity:.28}
+  100%{transform:translateY(-68px) scaleX(2.2); opacity:0}
+}
+@keyframes mote-drift       {
+  0%  {transform:translate(0,0);       opacity:.5}
+  25% {transform:translate(4px,-9px);  opacity:.8}
+  55% {transform:translate(-3px,-18px);opacity:.4}
+  80% {transform:translate(5px,-26px); opacity:.2}
+  100%{transform:translate(1px,-38px); opacity:0}
+}
+@keyframes cable-spark      {
+  0%  {stroke-dashoffset:220; opacity:1}
+  80% {stroke-dashoffset:0;   opacity:.7}
+  100%{stroke-dashoffset:0;   opacity:0}
+}
+@keyframes hover-cable      {
+  0%  {stroke-dashoffset:280; opacity:.9}
+  100%{stroke-dashoffset:0;   opacity:0}
+}
+
+/* ── mutation sequence ──────────────────────────────────── */
+@keyframes elec-travel      {
+  0%  {stroke-dashoffset:400; opacity:1}
+  70% {stroke-dashoffset:0;   opacity:.8}
+  100%{stroke-dashoffset:0;   opacity:0}
+}
+@keyframes scan-pulse       {
+  0%  {opacity:0;transform:scaleY(0)}
+  18% {opacity:.9;transform:scaleY(.4)}
+  55% {opacity:.5;transform:scaleY(1)}
+  100%{opacity:0;transform:scaleY(1.05)}
+}
+@keyframes lab-dim          {
+  0%,100%{opacity:0}
+  20%,80%{opacity:.38}
+}
+@keyframes btn-depress      {
+  0%,100%{transform:scale(1) translateY(0)}
+  25%    {transform:scale(.94) translateY(3px)}
+}
+@keyframes hologram-in      {
+  from{opacity:0;transform:translateY(16px) scale(.88)}
+  to  {opacity:1;transform:translateY(0)    scale(1)}
+}
+@keyframes stamp-appear     {
+  0%  {opacity:0;transform:rotate(8deg) scale(1.3)}
+  60% {opacity:1;transform:rotate(-3deg) scale(.97)}
+  100%{opacity:1;transform:rotate(-1deg) scale(1)}
+}
+@keyframes chamber-vibrate  {
+  0%,100%{transform:translate(0,0)}
+  25%    {transform:translate(-1px,-1px)}
+  75%    {transform:translate(1px,1px)}
+}
+
+/* ── base classes ───────────────────────────────────────── */
+.mutation-lab { font-family:'IBM Plex Mono',monospace; color:#080807; isolation:isolate; }
+.mutation-lab::before {
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:50;
+  opacity:.1; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E");
+}
+.mutation-lab * { box-sizing:border-box; }
+.anton  { font-family:'Anton',Impact,sans-serif; }
+.marker { font-family:'Permanent Marker',cursive; }
+.mono   { font-family:'IBM Plex Mono',monospace; }
+
+/* ── organic state classes ──────────────────────────────── */
+.organ.installed { animation:wobble 2.4s ease-in-out infinite; }
+.mutating .creature { animation:screen-flash .7s steps(3,end) 2, mutation-float 4s ease-in-out infinite; filter:contrast(1.5) saturate(1.5); }
+
+/* ── surface textures ───────────────────────────────────── */
+.ripped-paper { clip-path:polygon(0 3%,3% 0,8% 3%,14% 0,22% 3%,30% 0,40% 3%,50% 0,60% 3%,70% 0,80% 3%,90% 0,97% 3%,100% 0,100% 97%,97% 100%,88% 97%,78% 100%,68% 97%,58% 100%,48% 97%,38% 100%,28% 97%,18% 100%,8% 97%,0 100%); }
+.ripped-top   { clip-path:polygon(0 5%,3% 0,8% 5%,14% 0,22% 5%,30% 0,40% 5%,50% 0,60% 5%,70% 0,80% 5%,90% 0,97% 5%,100% 0,100% 100%,0 100%); }
+.stripe       { background:repeating-linear-gradient(135deg,#080807 0 8px,#F5D400 8px 16px); }
+.instrument-screw { width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#8A7E6E,#4A4038);border:1.5px solid #080807;box-shadow:inset 1px 1px 0 rgba(255,255,255,.25);position:absolute; }
+
+/* ── parallax background ────────────────────────────────── */
+.ml-bg {
+  position:absolute; inset:-24px;
+  background-size:cover; background-position:center; background-repeat:no-repeat;
+  will-change:transform;
+  transition:transform .12s ease-out;
+}
+
+/* ── organ slot keyboard focus ──────────────────────────── */
+.organ-slot:focus-visible {
+  outline: 3px solid #F5D400;
+  outline-offset: 3px;
+}
+.organ-slot:focus:not(:focus-visible) { outline: none; }
+
+/* ── specimen generation sequence ──────────────────────── */
+@keyframes scanner-sweep {
+  0%   { top:0%;    opacity:0 }
+  4%   { opacity:1 }
+  92%  { opacity:.8 }
+  100% { top:100%;  opacity:0 }
+}
+@keyframes specimen-materialize {
+  0%   { opacity:0;  transform:scale(.72) translateY(24px); filter:blur(10px) brightness(4) hue-rotate(170deg) saturate(3) }
+  18%  { opacity:.7; filter:blur(5px) brightness(2.4) hue-rotate(90deg) saturate(2) }
+  55%  { opacity:.9; transform:scale(1.04) translateY(-5px); filter:blur(1px) brightness(1.2) hue-rotate(0deg) }
+  72%  { transform:scale(.97) translateY(3px); filter:blur(0) brightness(1) }
+  88%  { transform:scale(1.01) translateY(-1px) }
+  100% { opacity:1;  transform:scale(1) translateY(0); filter:blur(0) brightness(1) }
+}
+@keyframes specimen-idle {
+  0%,100% { transform:translateY(0)    rotate(-.4deg) scale(1.000) }
+  35%     { transform:translateY(-4px) rotate(.3deg)  scale(1.008) }
+  70%     { transform:translateY(-2px) rotate(-.2deg) scale(1.004) }
+}
+@keyframes gen-particle {
+  0%,100% { transform:translate(0,0)   scale(.4); opacity:0 }
+  15%     { opacity:.9 }
+  50%     { transform:translate(var(--gx,0px), var(--gy,-30px)) scale(1.2); opacity:.8 }
+  85%     { opacity:.3 }
+}
+@keyframes gen-elec {
+  0%,100% { opacity:0; stroke-dashoffset:60 }
+  20%,60% { opacity:.9; stroke-dashoffset:0 }
+  40%     { opacity:.4 }
+}
+@keyframes gen-pulse-cyan {
+  0%,100% { opacity:.3; box-shadow:0 0 40px rgba(23,201,194,.35) }
+  50%     { opacity:.65; box-shadow:0 0 80px rgba(23,201,194,.7), 0 0 140px rgba(23,201,194,.3) }
+}
+@keyframes gen-shadow-breathe {
+  0%,100% { transform:translateX(-50%) scaleX(1); opacity:.35 }
+  50%     { transform:translateX(-50%) scaleX(.7); opacity:.18 }
+}
+@keyframes gen-msg-in {
+  from { opacity:0; transform:translateY(6px) }
+  to   { opacity:1; transform:translateY(0) }
+}
+
+/* ── accessibility: reduce motion ───────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .mutation-lab *,
+  .mutation-lab *::before,
+  .mutation-lab *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
