@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "FrankenApp"
+description = "FrankenApp — a darkly humorous SaaS landing page and interactive Mutation Lab where founders can bolt on features (organs) to their app creature. The landing sells the product with horror-lab aesthetic and connects to the MutationLab overlay for hands-on feature selection. No backend needed — pure frontend experience."
+version = "1.0.0"
+id = "artifacts/frankenapp"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18091
+
+[services.development]
+run = "pnpm --filter @workspace/frankenapp run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/frankenapp", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/frankenapp/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18091"
+BASE_PATH = "/"
